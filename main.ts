@@ -27,6 +27,10 @@ if (/[\r\n]/.test(JOKE)) {
   console.error('entry must be a single line with no line breaks');
   process.exit(1);
 }
+if (!/[.!?]$/.test(JOKE.trim())) {
+  console.error(`entry must be one complete line ending in punctuation, got: ${JSON.stringify(JOKE)}`);
+  process.exit(1);
+}
 
 mkdirSync(OUTPUT_DIR, { recursive: true });
 writeFileSync(`${OUTPUT_DIR}/entry.txt`, JOKE, 'utf8');
